@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!DOCTYPE html>  
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài 2 Khuất Văn Trường</title>
+    <title>Bài 2 Lab 1 Khuất Văn Trường </title>
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
@@ -11,48 +11,64 @@
             background-color: #f8f9fa;
             margin: 0;
             padding: 0;
+            zoom: 90%;
         }
         .container {
-            width: 90%;
+            width: 80%;
+            max-width: 1200px;
             margin: 20px auto;
             background: #fff;
-            padding: 20px;
+            padding: 15px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .title {
             color: #d9534f;
             text-align: left;
-            font-size: 22px;
+            font-size: 20px;
             font-weight: bold;
-            border-bottom: 2px solid #d9534f;
-            padding-bottom: 10px;
+            
         }
         .grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 20px;
+            gap: 15px;
+            margin-top: 15px;
         }
         .course {
             background: #fff;
-            padding: 15px;
+            padding: 10px;
             border-radius: 5px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-            text-align: center;
+            text-align: left;
         }
         .course img {
             width: 100%;
+            height: auto;
+            aspect-ratio: 2 / 1;
             border-radius: 5px;
+            object-fit: cover;
         }
         .course h3 {
-            color: #0275d8;
-            font-size: 18px;
-            margin: 10px 0;
+            color: #000000;
+            font-size: 16px;
+            margin: 8px 0;
         }
         .course p {
-            font-size: 14px;
+            font-size: 13px;
             color: #333;
-            margin: 5px 0;
+            margin: 4px 0;
+            display: flex;
+            align-items: center;
+        }
+        .course p img {
+            width: 16px;
+            height: 16px;
+            margin-right: 5px;
+        }
+        .description {
+            font-size: 13px;
+            color: #555;
+            margin: 8px 0;
         }
     </style>
 </head>
@@ -61,45 +77,56 @@
         <h2 class="title">| KHÓA HỌC SẮP KHAI GIẢNG</h2>
         <div class="grid">
             <div class="course">
-                <img src="picture/1.jpg" alt="Học bổng">
+                <img src="pictures/1.jpg" alt="Học bổng">
                 <h3>LẬP TRÌNH VIÊN QUỐC TẾ</h3>
-                <p>Học bổng 15.000.000 VND</p>
-                <p>Khai giảng: 2/2024</p>
-                <p>Thời lượng: 2 - 2.5 năm</p>
+                <p class="description">Chương trình đào tạo chuẩn quốc tế và toàn diện. Phù hợp với học sinh tốt nghiệp THPT, sinh viên và người định hướng theo nghề lập trình chuyên nghiệp.</p>
+                <p><img src="pictures/shop.png" alt="Ưu đãi"> Học bổng 15.000.000 VND</p>
+                <p><img src="pictures/save.png" alt="Khai giảng"> Khai giảng: 2/2024</p>
+                <p><img src="pictures/time.png" alt="Thời lượng"> Thời lượng: 2 - 2.5 năm</p>
             </div>
             <div class="course">
-                <img src="picture/1.jpg" alt="Fullstack">
+                <img src="pictures/3.jpg" alt="Fullstack">
                 <h3>LẬP TRÌNH WEB FULLSTACK</h3>
-                <p>Ưu đãi giảm 15% học phí</p>
-                <p>Khai giảng: 2/2024</p>
-                <p>Thời lượng: 6 tháng</p>
+                <p class="description">Khóa học phù hợp với người bắt đầu lập trình hoặc người chuyển nghề. Trang bị từ frontend đến backend, xây dựng website hoàn chỉnh sau khóa học.</p>
+                <p><img src="pictures/shop.png" alt="Ưu đãi"> Ưu đãi: Giảm 15% học phí</p>
+                <p><img src="pictures/save.png" alt="Khai giảng"> Khai giảng: 2/2024</p>
+                <p><img src="pictures/time.png" alt="Thời lượng"> Thời lượng: 6 tháng</p>
             </div>
             <div class="course">
-                <img src="picture/1.jpg" alt="Java">
+                <img src="pictures/5.jpg" alt="Java">
                 <h3>LẬP TRÌNH JAVA FULLSTACK</h3>
-                <p>Ưu đãi giảm 15% học phí</p>
-                <p>Khai giảng: 2/2024</p>
-                <p>Thời lượng: 236 giờ</p>
+                <p class="description">Phát triển ứng dụng web từ cơ bản đến nâng cao bằng Java, các ứng dụng doanh nghiệp sử dụng J2EE, Servlet, JSP, Spring Framework, EJB,...</p>
+                <p><img src="pictures/shop.png" alt="Ưu đãi"> Ưu đãi: Giảm 15% học phí</p>
+                <p><img src="pictures/save.png" alt="Khai giảng"> Khai giảng: 2/2024</p>
+                <p><img src="pictures/time.png" alt="Thời lượng"> Thời lượng: 236 giờ</p>
             </div>
             <div class="course">
-                <img src="picture/1.jpg" alt="PHP">
+                <img src="pictures/6.jpg" alt="PHP">
                 <h3>LẬP TRÌNH PHP & LARAVEL</h3>
-                <p>Học phí: 6.000.000 VND</p>
-                <p>Khai giảng: 5/2024</p>
-                <p>Thời lượng: 36 giờ</p>
+                <p class="description">PHP là một trong các ngôn ngữ thiết kế web mạnh nhất. Khóa học trang bị kiến thức từ căn bản đến nâng cao với Laravel.</p>
+                <p><img src="pictures/time.png" alt="Thời lượng"> Khai giảng: 5/2/2024</p>
+                <p><img src="pictures/shop.png" alt="Ưu đãi"> Học phí: 9.600.000 VND</p>
+                <p><img src="pictures/save.png" alt="Khai giảng"> Thời lượng: 36 giờ</p>
+     
             </div>
             <div class="course">
-                <img src="picture/1.jpg" alt=".NET">
+                <img src="pictures/8.jpg" alt=".NET">
                 <h3>KHÓA HỌC LẬP TRÌNH .NET</h3>
-                <p>Học phí: 6.000.000 VND</p>
-                <p>Khai giảng: 2/2024</p>
+                <p class="description">Phát triển ứng dụng web sử dụng nền tảng ASP.NET Core MVC. Được học từ khóa học yêu cầu cho đến có kiến thức cơ bản về Frontend.</p>
+                <p><img src="pictures/time.png" alt="Thời lượng"> Khai giảng: 2/2024</p>
+                <p><img src="pictures/save.png" alt="Khai giảng"> Thời lượng: 40 giờ</p>
+                <p><img src="pictures/shop.png" alt="Ưu đãi"> Học phí: 6.000.000 VND</p>
+   
+               
             </div>
             <div class="course">
-                <img src="picture/1.jpg"alt="SQL Server">
+                <img src="pictures/2.jpg" alt="SQL Server">
                 <h3>LẬP TRÌNH SQL SERVER</h3>
-                <p>Học phí: 4.500.000 VND</p>
-                <p>Khai giảng: 2/2024</p>
-                <p>Thời lượng: 30 giờ</p>
+                <p class="description">Trang bị những kiến thức nền tảng vững chắc về SQL Server như các kỹ thuật: lưu trữ dữ liệu, phân tích, thiết kế và quản trị cơ sở dữ liệu.</p>
+                <p><img src="pictures/time.png" alt="Thời lượng"> Khai giảng: 2/2024</p>
+                <p><img src="pictures/shop.png" alt="Ưu đãi"> Học phí: 4.500.000 VND</p>
+                <p><img src="pictures/save.png" alt="Khai giảng"> Thời lượng: 30 giờ</p>
+           
             </div>
         </div>
     </div>
