@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 2 Lab 2 Khuất Văn Trường</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Oleo+Script:wght@700&family=Quicksand:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        /* Header */
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            color: white;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-style: italic;
+            font-weight: bold;
+            color: gold;
+            font-family: 'Oleo Script', cursive;
+        }
+
+        nav a {
+            color: yellow;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('assets/extra-files/ocean.jpg') no-repeat center center/cover;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero .overlay {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .hero .btn {
+            background: yellow;
+            padding: 10px 20px;
+            display: inline-block;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            margin-top: 10px;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        /* Highlights */
+        .highlights {
+            background: #cefaff;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .highlights h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .gallery {
+            display: flex;
+            justify-content: center;
+            gap: 1px;
+        }
+
+        .place {
+            text-align: center;
+        }
+
+        .place img {
+            border-radius: 10px;
+            width: 90%;
+            height: auto;
+            aspect-ratio: 3 / 1;
+            object-fit: cover;
+        }
+
+        .place p {
+            color: gray;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .place p .xanhdam {
+            color: #21fa00;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background: black;
+            padding: 15px;
+            text-align: center;
+        }
+
+        footer a {
+            color: white;
+            font-size: 24px;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1 class="logo">TRAVEL GOALS</h1>
+        <nav>
+            <a href="#">Destinations</a>
+            <a href="#">About</a>
+        </nav>
+    </header>
+
+ 
+    <section class="hero">
+        <div class="overlay">
+            <h2>JOE'S TRAVEL PAGE</h2>
+            <p>LET'S EXPLORE THE WORLD TOGETHER!</p>
+            <a href="#" class="btn">Discover places</a>
+        </div>
+    </section>
+
+ 
+    <section class="highlights">
+        <h2>HIGHLIGHTS</h2>
+        <div class="gallery">
+            <div class="place">
+                <img src="assets/extra-files/cities/miami.jpg" alt="Miami USA">
+                <p>MIAMI <span class="xanhdam">USA</span></p>
+            </div>
+            <div class="place">
+                <img src="assets/extra-files/cities/munich.jpg" alt="Munich Germany">
+                <p>MUNICH <span class="xanhdam">GERMANY</span></p>
+            </div>
+            <div class="place">
+                <img src="assets/extra-files/cities/barcelona.jpg" alt="Barcelona Spain">
+                <p>BARCELONA <span class="xanhdam">SPAIN</span></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <a href="#"><img src="assets/extra-files/icons/insta.png" alt="Instagram" width="40"></a>
+        <a href="#"><img src="assets/extra-files/icons/facebook.png" alt="Facebook" width="40"></a>
+    </footer>
+
+</body>
+</html>
