@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Todo List - Lab 3 Khuất Văn Trường</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+    .todo-container {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 320px;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .input-group {
+      display: flex;
+      width: 100%;
+    }
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px 0 0 4px;
+    }
+    button {
+      padding: 10px;
+      background: #708976;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 0 4px 4px 0;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+    li {
+      background: #eee;
+      padding: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 4px;
+    }
+    li.completed span {
+      text-decoration: line-through;
+      color: gray;
+    }
+    .btn-group {
+      display: flex;
+      gap: 5px;
+    }
+    .delete-btn, .edit-btn {
+      background: #dc3545;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .edit-btn {
+      background: #ffc107;
+    }
+    .filter-group {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="todo-container">
+    <h1>Todo List JS</h1>
+    <div class="input-group">
+      <input type="text" id="taskInput" placeholder="Nhập công việc..." />
+      <button id="addBtn">Thêm</button>
+    </div>
+    <div class="filter-group">
+      <button class="filter-btn" data-filter="all">Tất cả</button>
+      <button class="filter-btn" data-filter="pending">Chưa hoàn thành</button>
+      <button class="filter-btn" data-filter="completed">Đã hoàn thành</button>
+    </div>
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    // Lấy phần tử input nhập công việc, nút thêm, danh sách công việc và các nút lọc
+    const taskInput = document.getElementById('taskInput'); // Ô nhập công việc
+    const addBtn = document.getElementById('addBtn'); // Nút thêm công việc
+    const taskList = document.getElementById('taskList'); // Danh sách công việc
+    const filterBtns = document.querySelectorAll('.filter-btn'); // Các nút lọc công việc
+
+    // Hàm thêm công việc vào danh sách
+    function addTask() {
+      const taskText = taskInput.value.trim(); // Lấy nội dung nhập vào và loại bỏ khoảng trắng thừa
+      if (taskText === '') { // Kiểm tra nếu ô nhập rỗng
+        alert('Vui lòng nhập công việc!'); // Hiển thị thông báo
+        return; // Dừng hàm nếu không có nội dung
+      }
+      
+      const li = document.createElement('li'); // Tạo thẻ <li> mới
+      const span = document.createElement('span'); // Tạo thẻ <span> chứa nội dung công việc
+      span.textContent = taskText; // Gán nội dung công việc vào <span>
+      li.appendChild(span); // Thêm <span> vào <li>
+
+      // Tạo nhóm nút chỉnh sửa và xóa
+      const btnGroup = document.createElement('div'); 
+      btnGroup.className = 'btn-group'; // Gán class cho nhóm nút
+
+      // Tạo nút chỉnh sửa
+      const editBtn = document.createElement('button');
+      editBtn.textContent = 'Sửa'; // Gán nội dung cho nút
+      editBtn.className = 'edit-btn'; // Gán class cho nút
+      btnGroup.appendChild(editBtn); // Thêm nút sửa vào nhóm nút
+
+      // Tạo nút xóa
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = 'Xóa'; // Gán nội dung cho nút
+      deleteBtn.className = 'delete-btn'; // Gán class cho nút
+      btnGroup.appendChild(deleteBtn); // Thêm nút xóa vào nhóm nút
+
+      li.appendChild(btnGroup); // Thêm nhóm nút vào <li>
+      taskList.appendChild(li); // Thêm <li> vào danh sách công việc
+
+      taskInput.value = ''; // Xóa nội dung ô nhập sau khi thêm xong
+      saveTasks(); // Lưu danh sách công việc vào localStorage
+    }
+
+    // Hàm xóa công việc
+    function deleteTask(e) {
+      if (e.target.classList.contains('delete-btn')) { // Kiểm tra xem phần tử được nhấn có phải nút xóa không
+        if (confirm('Bạn có chắc chắn muốn xóa công việc này?')) { // Xác nhận trước khi xóa
+          e.target.parentElement.parentElement.remove(); // Xóa công việc khỏi danh sách
+          saveTasks(); // Lưu lại danh sách sau khi xóa
+        }
+      }
+    }
+
+    // Hàm chỉnh sửa công việc
+    function editTask(e) {
+      if (e.target.classList.contains('edit-btn')) { // Kiểm tra xem phần tử được nhấn có phải nút sửa không
+        const li = e.target.parentElement.parentElement; // Lấy thẻ <li> chứa công việc
+        const span = li.querySelector('span'); // Lấy phần tử <span> chứa nội dung công việc
+        const newText = prompt('Chỉnh sửa công việc:', span.textContent); // Hiển thị hộp thoại nhập nội dung mới
+        if (newText !== null && newText.trim() !== '') { // Kiểm tra nếu nội dung hợp lệ
+          span.textContent = newText.trim(); // Cập nhật nội dung công việc
+          saveTasks(); // Lưu lại danh sách sau khi chỉnh sửa
+        }
+      }
+    }
+
+    // Hàm đánh dấu hoàn thành công việc
+    function toggleComplete(e) {
+      if (e.target.tagName === 'SPAN') { // Kiểm tra nếu nhấn vào phần tử <span> (nội dung công việc)
+        e.target.parentElement.classList.toggle('completed'); // Thêm/xóa class 'completed' để đánh dấu hoàn thành
+        saveTasks(); // Lưu lại danh sách sau khi thay đổi
+      }
+    }
+
+    // Hàm lưu danh sách công việc vào localStorage
+    function saveTasks() {
+      const tasks = []; // Mảng chứa danh sách công việc
+      document.querySelectorAll('#taskList li').forEach(li => { // Lặp qua từng công việc
+        tasks.push({
+          text: li.firstChild.textContent, // Lưu nội dung công việc
+          completed: li.classList.contains('completed') // Lưu trạng thái hoàn thành hay chưa
+        });
+      });
+      localStorage.setItem('tasks', JSON.stringify(tasks)); // Lưu vào localStorage dưới dạng JSON
+    }
+
+    // Hàm tải danh sách công việc từ localStorage khi tải trang
+    function loadTasks() {
+      const tasks = JSON.parse(localStorage.getItem('tasks')) || []; // Lấy danh sách từ localStorage hoặc tạo mảng rỗng nếu chưa có
+      taskList.innerHTML = ''; // Xóa danh sách cũ để cập nhật mới
+      tasks.forEach(task => { // Lặp qua danh sách công việc
+        const li = document.createElement('li'); // Tạo thẻ <li> mới
+        const span = document.createElement('span'); // Tạo thẻ <span>
+        span.textContent = task.text; // Gán nội dung công việc vào <span>
+        li.appendChild(span); // Thêm <span> vào <li>
+
+        // Tạo nhóm nút chỉnh sửa và xóa
+        const btnGroup = document.createElement('div');
+        btnGroup.className = 'btn-group';
+
+        // Tạo nút chỉnh sửa
+        const editBtn = document.createElement('button');
+        editBtn.textContent = 'Sửa';
+        editBtn.className = 'edit-btn';
+        btnGroup.appendChild(editBtn);
+
+        // Tạo nút xóa
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Xóa';
+        deleteBtn.className = 'delete-btn';
+        btnGroup.appendChild(deleteBtn);
+
+        li.appendChild(btnGroup); // Thêm nhóm nút vào <li>
+        if (task.completed) li.classList.add('completed'); // Nếu công việc hoàn thành, thêm class 'completed'
+        taskList.appendChild(li); // Thêm <li> vào danh sách công việc
+      });
+    }
+
+    // Hàm lọc công việc theo trạng thái
+    function filterTasks(e) {
+      const filter = e.target.dataset.filter; // Lấy trạng thái lọc từ thuộc tính data-filter
+      document.querySelectorAll('#taskList li').forEach(li => { // Lặp qua danh sách công việc
+        switch (filter) {
+          case 'all': // Hiển thị tất cả công việc
+            li.style.display = 'flex';
+            break;
+          case 'pending': // Hiển thị công việc chưa hoàn thành
+            li.style.display = li.classList.contains('completed') ? 'none' : 'flex';
+            break;
+          case 'completed': // Hiển thị công việc đã hoàn thành
+            li.style.display = li.classList.contains('completed') ? 'flex' : 'none';
+            break;
+        }
+      });
+    }
+
+    // Thêm sự kiện click cho nút thêm công việc
+    addBtn.addEventListener('click', addTask);
+    // Thêm sự kiện click để xóa công việc
+    taskList.addEventListener('click', deleteTask);
+    // Thêm sự kiện click để chỉnh sửa công việc
+    taskList.addEventListener('click', editTask);
+    // Thêm sự kiện click để đánh dấu hoàn thành công việc
+    taskList.addEventListener('click', toggleComplete);
+    // Tải danh sách công việc khi trang tải xong
+    document.addEventListener('DOMContentLoaded', loadTasks);
+    // Thêm sự kiện click cho các nút lọc công việc
+    filterBtns.forEach(btn => btn.addEventListener('click', filterTasks));
+</script>
+
+</body>
+</html>
