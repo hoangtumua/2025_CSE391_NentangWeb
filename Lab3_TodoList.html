@@ -131,7 +131,7 @@
       btnGroup.appendChild(deleteBtn); // Thêm nút xóa vào nhóm nút
 
       li.appendChild(btnGroup); // Thêm nhóm nút vào <li>
-      taskList.appendChild(li); // Thêm <li> vào danh sách công việc
+      taskList.appendChild(li); // Thêm <li> vào ds cv
 
       taskInput.value = ''; // reset ô nhập
       saveTasks(); // Lưu dsách cv vào localStorage
@@ -149,8 +149,8 @@
     // Hàm chỉnh sửa công việc
     function editTask(e) {
       if (e.target.classList.contains('edit-btn')) {  
-        const li = e.target.parentElement.parentElement; // Lấy thẻ <li> chứa công việc
-        const span = li.querySelector('span'); // Lấy phần tử <span> chứa nội dung công việc
+        const li = e.target.parentElement.parentElement; // Lấy thẻ <li> chứa cv
+        const span = li.querySelector('span'); // Lấy phần tử <span> chứa ndcv
         const newText = prompt('Chỉnh sửa công việc:', span.textContent); // hiện box nhập nd chỉnh sửa
         if (newText !== null && newText.trim() !== '') { // Kiểm tra ndung hlệ hay 0
           span.textContent = newText.trim(); // update ndung cv
@@ -186,7 +186,7 @@
       tasks.forEach(task => { // Lặp dscv
         const li = document.createElement('li'); // Tạo thẻ <li> mới
         const span = document.createElement('span'); // Tạo thẻ <span>
-        span.textContent = task.text; // Gán nội dung công việc vào <span>
+        span.textContent = task.text; // Gán ndcv vào <span>
         li.appendChild(span); // Thêm <span> vào <li>
 
         // Tạo nhóm nút chỉnh sửa và xóa
@@ -214,7 +214,7 @@
     // Hàm lọc  
     function filterTasks(e) {
       const filter = e.target.dataset.filter; // Lấy trạng thái lọc từ thuộc tính data-filter
-      document.querySelectorAll('#taskList li').forEach(li => { // Lặp qua danh sách công việc
+      document.querySelectorAll('#taskList li').forEach(li => { // Lặp ds cv
         switch (filter) {
           case 'all': // Hiển thị tcả cv
             li.style.display = 'flex';
