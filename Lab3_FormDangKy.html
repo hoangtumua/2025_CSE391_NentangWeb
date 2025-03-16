@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FormDangKy - Lab 3 Khuất Văn Trường</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .error { color: red; font-size: 14px; }
+        #success-message { display: none; padding: 10px; background: #d4edda; color: #155724; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <h2>Đăng Ký</h2>
+    <form id="register-form">
+        <label>Họ tên:</label>
+        <input type="text" id="fullname" name="fullname">
+        <span class="error hidden" id="fullname-error">Họ tên không được trống</span>
+        <br>
+        
+        <label>Email:</label>
+        <input type="email" id="email" name="email">
+        <span class="error hidden" id="email-error">Email không hợp lệ</span>
+        <br>
+        
+        <label>Mật khẩu:</label>
+        <input type="password" id="password" name="password">
+        <span class="error hidden" id="password-error">Mật khẩu phải có ít nhất 6 ký tự</span>
+        <br>
+        
+        <button type="submit">Đăng Ký</button>
+    </form>
+    
+    <div id="success-message">Đăng ký thành công! Chào mừng bạn.</div>
+
+    <script>
+        $(document).ready(function() {
+            console.log("jQuery is ready!");
+
+            $("#register-form").on("submit", function(e) {
+                e.preventDefault();
+                let isValid = true;
+                
+                $(".error").addClass("hidden");
+                
+                let fullname = $("#fullname").val().trim();
+                let email = $("#email").val().trim();
+                let password = $("#password").val();
+                
+                if (fullname === "") {
+                    $("#fullname-error").removeClass("hidden");
+                    isValid = false;
+                }
+                
+                let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(email)) {
+                    $("#email-error").removeClass("hidden");
+                    isValid = false;
+                }
+                
+                if (password.length < 6) {
+                    $("#password-error").removeClass("hidden");
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    $.post("https://jsonplaceholder.typicode.com/posts", {
+                        fullname: fullname,
+                        email: email,
+                        password: password
+                    }, function(response) {
+                        console.log("Response:", response);
+                        $("#register-form").slideUp();
+                        $("#success-message").fadeIn();
+                    }).fail(function() {
+                        alert("Server bận, vui lòng thử lại sau.");
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
