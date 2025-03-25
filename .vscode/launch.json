@@ -7,8 +7,8 @@
         {
             "type": "msedge",
             "request": "launch",
-            "name": "Open Lab2_Bai1.html",
-            "file": "c:\\Users\\ADMIN\\Documents\\2025_CSE391_NentangWeb\\Lab2_Bai1.html"
+            "name": "Open Lab3_TodoList.html",
+            "file": "c:\\Users\\ADMIN\\Documents\\2025_CSE391_NentangWeb\\Lab3_TodoList.html"
         }
     ]
 }

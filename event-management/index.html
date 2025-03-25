@@ -1,0 +1,56 @@
+<!DOCTYPE html> 
+<html lang="vi"> 
+<head>
+    <meta charset="UTF-8"> <!-- Định dạng ký tự UTF-8, hỗ trợ tiếng Việt -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Giúp trang hiển thị tốt trên thiết bị di động -->
+    <title>Quản lý sự kiện</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Liên kết file CSS -->
+</head>
+<body>
+
+    <div class="container"> <!-- Phần chứa toàn bộ nội dung chính -->
+        <h1>Quản lý sự kiện</h1> <!-- Tiêu đề trang -->
+
+        <!-- Form thêm sự kiện -->
+        <div class="event-form"> 
+            <input type="text" id="eventName" placeholder="Tên sự kiện">
+            <input type="date" id="eventDate">
+            <input type="text" id="eventLocation" placeholder="Địa điểm"> 
+            <select id="eventStatus"> <!-- Dropdown chọn trạng thái sự kiện -->
+                <option value="Sắp diễn ra">Sắp diễn ra</option>
+                <option value="Đang diễn ra">Đang diễn ra</option>
+                <option value="Đã kết thúc">Đã kết thúc</option> 
+            </select>
+            <button id="addEvent">Thêm sự kiện</button> <!-- Nút để thêm sự kiện -->
+            <button id="updateEvent" style="display: none;">Cập nhật</button> <!-- Nút để cập nhật sự kiện (ẩn ban đầu) -->
+        </div>
+
+        <!-- Bộ lọc sự kiện -->
+        <div class="filter"> 
+            <select id="filterStatus"> <!-- Dropdown chọn bộ lọc -->
+                <option value="all">Tất cả</option> <!-- Hiển thị tất cả sự kiện -->
+                <option value="Sắp diễn ra">Sắp diễn ra</option> <!-- Lọc theo trạng thái -->
+                <option value="Đang diễn ra">Đang diễn ra</option>
+                <option value="Đã kết thúc">Đã kết thúc</option>
+            </select>
+            <button id="filterButton">Lọc trạng thái</button> <!-- Nút để lọc danh sách sự kiện -->
+        </div>
+
+        <!-- ds sk -->
+        <table> 
+            <thead> <!-- Tiêu đề bảng -->
+                <tr> 
+                    <th>Tên</th> <!-- Cột tên sự kiện -->
+                    <th>Ngày</th> 
+                    <th>Địa điểm</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th> 
+                </tr>
+            </thead>
+            <tbody id="eventList"></tbody> <!-- Khu vực hiển thị danh sách sự kiện -->
+        </table>
+    </div>
+
+    <script src="script.js"></script> <!-- Liên kết file JavaScript để xử lý logic -->
+</body>
+</html>
